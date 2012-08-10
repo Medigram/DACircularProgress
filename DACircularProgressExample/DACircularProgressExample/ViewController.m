@@ -10,6 +10,7 @@
 
 @interface ViewController ()
 @property (strong, nonatomic) NSTimer *timer;
+- (void)startAnimation;
 @end
 
 @implementation ViewController
@@ -27,9 +28,10 @@
 {
     [super viewDidLoad];
     
-    self.progressView = [[DACircularProgressView alloc] initWithFrame:CGRectMake(140.0f, 30.0f, 40.0f, 40.0f)];
+    self.progressView = [[DACircularProgressView alloc] initWithFrame:CGRectMake(140.0f, 30.0f, 25.0f, 25.0f)];
     self.progressView.roundedCorners = YES;
     self.progressView.trackTintColor = [UIColor clearColor];
+    self.progressView.thicknessRatio = 0.50;
     [self.view addSubview:self.progressView];
     
     self.largeProgressView = [[DACircularProgressView alloc] initWithFrame:CGRectMake(110.0f, 85.0f, 100.0f, 100.0f)];
@@ -47,7 +49,7 @@
 {
     for (DACircularProgressView *progressView in [NSArray arrayWithObjects:self.linearProgressView, self.progressView, self.largeProgressView, self.largestProgressView, nil])
     {
-        CGFloat progress = ![self.timer isValid] ? self.stepper.value / 10.f : progressView.progress + 0.01f;
+        CGFloat progress = ![self.timer isValid] ? self.stepper.value / 10.f : progressView.progress + 0.02f;
         [progressView setProgress:progress animated:YES];
         
         if (progressView.progress >= 1.0f && [self.timer isValid])
